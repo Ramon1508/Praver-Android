@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu"
+    tools:context=".seleccionadoboton"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.synnapps.carouselview.CarouselView
+                android:id="@+id/carouselView"
+                android:layout_width="match_parent"
+                android:layout_height="233dp"
+                android:background="@color/cast_expanded_controller_background_color"
+                android:visibility="visible"
+                app:fillColor="#FFFFFFFF"
+                app:pageColor="#00000000"
+                app:radius="6dp"
+                app:slideInterval="3000"
+                app:strokeColor="#FF777777"
+                app:strokeWidth="1dp" />
+
+            <TextView
+                android:id="@+id/tituloprop3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TITULO PROPIEDAD"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/precio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Precio"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp"
+                    android:orientation="horizontal">
+                    <ImageButton
+                        android:id="@+id/llamar"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/llamada"
+                        android:layout_width="match_parent"
+                        android:layout_height="50sp"
+                        android:background="@android:color/holo_orange_dark"
+                        android:scaleType="fitCenter"
+                        android:padding="5dp" />
+                    <ImageButton
+                        android:id="@+id/ruta"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ruta"
+                        android:layout_width="match_parent"
+                        android:layout_height="50sp"
+                        android:background="@android:color/holo_orange_dark"
+                        android:scaleType="fitCenter"
+                        android:padding="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="3dp"/>
+                    <ImageButton
+                        android:id="@+id/mensaje"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="50sp"
+                        app:srcCompat="@drawable/mensaje"
+                        android:background="@android:color/holo_orange_dark"
+                        android:scaleType="fitCenter"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="VENDEDOR"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"/>
+                    <TextView
+                        android:id="@+id/vendedor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="NOMBRE VENDEDOR"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="INFORMACION DEL INMUEBLE"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/metrostotales"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Metros Totales"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp" />
+
+                    <TextView
+                        android:id="@+id/metrosconstruidos2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Metros Construidos"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp" />
+
+                    <TextView
+                        android:id="@+id/antiguedad2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Antiguedad"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp" />
+
+                    <TextView
+                        android:id="@+id/banos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Baños"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp" />
+
+                    <TextView
+                        android:id="@+id/mediosbanos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Medios Baños"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="UBICACION DEL INMUEBLE"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray" />
+                    <TextView
+                        android:id="@+id/entidadfederativa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Entidad Federativa"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="14sp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"/>
+                    <TextView
+                        android:id="@+id/municipio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Municipio"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="14sp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"/>
+                    <TextView
+                        android:id="@+id/colonia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Colonia"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="14sp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"/>
+
+                    <TextView
+                        android:id="@+id/calle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Calle"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"/>
+
+                    <TextView
+                        android:id="@+id/numint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Numero Interior"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"/>
+
+                    <TextView
+                        android:id="@+id/numext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Numero Exterior"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"/>
+
+                    <TextView
+                        android:id="@+id/codigopostal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Codigo Postal"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

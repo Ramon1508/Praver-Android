@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.osuna.inmobiliaria.inmuebledatos">
+
+    <com.synnapps.carouselview.CarouselView
+        android:id="@+id/carouselView"
+        android:layout_width="0dp"
+        android:layout_height="134dp"
+        android:layout_marginTop="36dp"
+        android:background="@color/cast_expanded_controller_background_color"
+        android:visibility="visible"
+        app:fillColor="#FFFFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:pageColor="#00000000"
+        app:radius="6dp"
+        app:slideInterval="3000"
+        app:strokeColor="#FF777777"
+        app:strokeWidth="1dp">
+
+    </com.synnapps.carouselview.CarouselView>
+
+    <ImageButton
+        android:id="@+id/cmdregresar"
+        android:layout_width="116dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="40dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/carouselView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/volver" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="39dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="194dp"
+            android:layout_height="39dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_orange_dark"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageButton2"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/llamada" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="195dp"
+            android:layout_height="39dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="1dp"
+            android:layout_marginEnd="11dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_orange_dark"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/mensaje" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tituloprop3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/cast_expanded_controller_background_color"
+        android:text="TITULO PROPIEDAD"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/carouselView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carouselView"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cardview_light_background"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/vendedor"
+                    android:layout_width="94dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="VENDEDOR"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/precio"
+                    android:layout_width="94dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="DESDE... $"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/direccion"
+                    android:layout_width="94dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="DIRECCION"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tipocasa"
+                    android:layout_width="94dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentStart="true"
+                    android:text="TIPO CASA"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+            </RelativeLayout>
+
+            <ImageButton
+                android:id="@+id/maximizar"
+                android:layout_width="match_parent"
+                android:layout_height="23dp"
+                android:background="@color/blanco"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/vermas" />
+
+            <RelativeLayout
+                android:id="@+id/lantiguedad"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cardview_light_background"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="58dp"
+                        android:layout_height="43dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginEnd="46dp"
+                        android:layout_marginRight="46dp"
+                        android:layout_toLeftOf="@+id/antiguedad2"
+                        android:layout_toStartOf="@+id/antiguedad2"
+                        android:layout_weight="0"
+                        app:srcCompat="@drawable/calendario" />
+
+                    <TextView
+                        android:id="@+id/antiguedad2"
+                        style="@android:style/Widget.DeviceDefault.Light.TextView"
+                        android:layout_width="94dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginEnd="124dp"
+                        android:layout_marginRight="124dp"
+                        android:layout_weight="2"
+                        android:text="ANTIGUEDAD"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/lestacionamiento"
+                    android:layout_width="match_parent"
+                    android:layout_height="51dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="56dp"
+                    android:background="@color/cardview_light_background"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageView4"
+                            android:layout_width="61dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            app:srcCompat="@drawable/estacionamiento" />
+
+                        <TextView
+                            android:id="@+id/estacionamiento"
+                            style="@android:style/Widget.DeviceDefault.Light.TextView"
+                            android:layout_width="235dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_toEndOf="@+id/imageView4"
+                            android:layout_toRightOf="@+id/imageView4"
+                            android:layout_weight="1"
+                            android:text="ESTACIONAMIENTO"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/lrecamaras"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/cardview_light_background"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="64dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_weight="0"
+                        app:srcCompat="@drawable/recamara" />
+
+                    <TextView
+                        android:id="@+id/recamaras"
+                        style="@android:style/Widget.DeviceDefault.Light.TextView"
+                        android:layout_width="183dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="110dp"
+                        android:layout_marginStart="110dp"
+                        android:layout_weight="0"
+                        android:text="RECAMARAS"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/lmetros"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@color/cardview_light_background"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="116dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/metrostotales"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:cropToPadding="true"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/casita" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/metrostotales"
+                            style="@android:style/Widget.DeviceDefault.Light.TextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/metrosconstruidos2"
+                            android:layout_toEndOf="@+id/imageView5"
+                            android:layout_toRightOf="@+id/imageView5"
+                            android:layout_weight="1"
+                            android:text="METROS TOTALES"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                        <TextView
+                            android:id="@+id/metrosconstruidos2"
+                            style="@android:style/Widget.DeviceDefault.Light.TextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:layout_toEndOf="@+id/imageView5"
+                            android:layout_toRightOf="@+id/imageView5"
+                            android:layout_weight="1"
+                            android:text="METROS CONSTRUIDOS"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/lbanos"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@color/cardview_light_background"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="116dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="11dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/toilet" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="visible">
+
+                            <TextView
+                                android:id="@+id/bcompletos"
+                                style="@android:style/Widget.DeviceDefault.Light.TextView"
+                                android:layout_width="94dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:text="BAÑOS COMPLETOS "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                            <TextView
+                                android:id="@+id/bmedios"
+                                style="@android:style/Widget.DeviceDefault.Light.TextView"
+                                android:layout_width="94dp"
+                                android:layout_height="wrap_content"
+                                android:layout_above="@+id/bcompletos"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:text="BAÑOS MEDIOS"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="129dp"
+                android:layout_alignBottom="@+id/imageView5"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:scaleType="fitCenter"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="138dp">
+
+                <ImageButton
+                    android:id="@+id/minimizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="23dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/cardview_light_background"
+                    android:scaleType="fitCenter"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/vermenos"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="431dp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

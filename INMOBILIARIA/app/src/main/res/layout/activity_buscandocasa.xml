@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.osuna.inmobiliaria.buscandocasa">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="619dp"
+        android:background="@drawable/menu"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.example.osuna.inmobiliaria.buscandocasa">
+
+        <LinearLayout
+            android:id="@+id/BarraArriba"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardview"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+                <fragment
+                    android:id="@+id/place_autocomplete_fragment"
+                    android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+                    android:layout_width="fill_parent"
+                    android:layout_height="55dp" />
+            </android.support.v7.widget.CardView>
+
+            <ImageButton
+                android:id="@+id/cmdfiltro"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="5"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ajuste"
+                android:visibility="visible"
+
+                />
+        </LinearLayout>
+        <TabHost
+            android:id="@+id/tabHost"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"></TabWidget>
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                    <LinearLayout
+                        android:id="@+id/ejemplo1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical">
+                        <ListView
+                            android:id="@+id/mi_lista"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+                        </ListView>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ejemplo2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical">
+
+                        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:id="@+id/map"
+                            android:name="com.google.android.gms.maps.SupportMapFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                </FrameLayout>
+            </LinearLayout>
+        </TabHost>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:clickable="true"
+        android:focusableInTouchMode="false"
+        app:backgroundTint="@android:color/holo_blue_dark"
+        app:srcCompat="@drawable/usuarionologeado"
+        tools:layout_editor_absoluteY="491dp" />
+
+</android.support.design.widget.CoordinatorLayout>

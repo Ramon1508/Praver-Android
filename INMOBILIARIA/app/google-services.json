@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "999118337717",
+    "firebase_url": "https://inmuebles-8b113.firebaseio.com",
+    "project_id": "inmuebles-8b113",
+    "storage_bucket": "inmuebles-8b113.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999118337717:android:1b725fd73f32aa98",
+        "android_client_info": {
+          "package_name": "com.example.osuna.inmobiliaria"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "999118337717-oegu6usmsqsvtvnper3g5qfrfpm175vq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.osuna.inmobiliaria",
+            "certificate_hash": "6d884640b550c322f73c866452fc67eae6335209"
+          }
+        },
+        {
+          "client_id": "999118337717-h9ss93d4us0s0e0tfatcclth3ea316et.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.osuna.inmobiliaria",
+            "certificate_hash": "5e511f6d07f273dfca1fd8cddf66265bb90e2eaa"
+          }
+        },
+        {
+          "client_id": "999118337717-kpp7knst2d9sh7ffjka2brlgul55lrjs.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "999118337717-kpp7knst2d9sh7ffjka2brlgul55lrjs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAx6hauXcbWl369C1jiEO5qZrYV8sgvqUA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "999118337717-kpp7knst2d9sh7ffjka2brlgul55lrjs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
