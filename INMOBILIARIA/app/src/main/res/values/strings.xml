@@ -3,6 +3,29 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_filtros">filtros</string>
     <string name="desc"></string>
+    <string-array name="antiguedad">
+        <item></item>
+        <item>En construcción</item>
+        <item>A estrenar</item>
+        <item>Hasta 5 años</item>
+        <item>Entre 5 y 10 años</item>
+        <item>Entre 10 y 20 años</item>
+        <item>Entre 20 y 50 años</item>
+        <item>Más de 50 años</item>
+    </string-array>
+    <string-array name="servicios">
+        <item></item>
+        <item>Gas</item>
+        <item>Aire acondicionado</item>
+        <item>Seguridad privada</item>
+        <item>Calefaccion</item>
+        <item>Amueblada</item>
+    </string-array>
+    <string-array name="tipoanunciante">
+        <item></item>
+        <item>Agente Independiente</item>
+        <item>Inmobiliaria</item>
+    </string-array>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_login">Sign in</string>

@@ -3,7 +3,9 @@ package com.example.osuna.inmobiliaria;
 import android.content.Intent;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,4 +17,5 @@ public class Globales {
     public static GoogleSignInAccount account = null;
     public static String JsonCasa = null;
     public static Intent ConectionIntent = null;
+    public static GoogleSignInResult googleSignInResult = null;
 }

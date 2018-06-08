@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class Lista_adaptador extends BaseAdapter {
 
-    private ArrayList<?> entradas;
+    public ArrayList<?> entradas;
     private int R_layout_IdView;
     private Context contexto;
 
@@ -73,24 +73,8 @@ public class Lista_adaptador extends BaseAdapter {
         TextView Direccion = (TextView) view.findViewById(R.id.direccionList);
         Direccion.setText(((Lista_entrada) entrada).get_Direccion());
 
-        final LinearLayout mainLayout = (LinearLayout) view.findViewById(R.id.imageViewList);
-        Picasso.with(contexto).load(((Lista_entrada) entrada).get_idImagen()).into(new Target(){
-
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                mainLayout.setBackground(new BitmapDrawable(contexto.getResources(), bitmap));
-            }
-
-            @Override
-            public void onBitmapFailed(final Drawable errorDrawable) {
-                Log.d("TAG", "FAILED");
-            }
-
-            @Override
-            public void onPrepareLoad(final Drawable placeHolderDrawable) {
-                Log.d("TAG", "Prepare Load");
-            }
-        });
+        ImageView imageview = (ImageView) view.findViewById(R.id.imageViewList);
+        Picasso.with(contexto).load(((Lista_entrada) entrada).get_idImagen()).into(imageview);
         /*ImageView imgview = (ImageView) view.findViewById(R.id.imageView_imagen);
         Picasso.with(contexto).load(((Lista_entrada) entrada).get_idImagen()).fit().into(imgview);*/
 

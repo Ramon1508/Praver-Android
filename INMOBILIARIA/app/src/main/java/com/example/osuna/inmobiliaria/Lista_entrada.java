@@ -5,6 +5,7 @@ public class Lista_entrada {
     private String Precio;
     private String Descripcion;
     private String Direccion;
+    public  String JSON;
     public Lista_entrada (String idImagen, String Precio, String Descripcion, String Direccion) {
         this.idImagen = idImagen;
         this.Precio = Precio;

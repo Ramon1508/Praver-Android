@@ -9,8 +9,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -135,7 +138,17 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
                     Double LatD = Double.parseDouble(Lat);
                     String Titulo= jsonObjectHijo.get("titulo").toString().replace("\"", "");
                     LDESC = Titulo;
-                    LDIR = jsonObjectHijo.get("calle").toString().replace("\"", "") + ", " + jsonObjectHijo.get("colonia").toString().replace("\"", "") + "\n" + jsonObjectHijo.get("municipio").toString().replace("\"", "") + ", " + jsonObjectHijo.get("entidad").toString().replace("\"", "");
+                    if (jsonObjectHijo.get("mostrarMapa").toString().replace("\"", "").equals("exac"))
+                    {
+                        LDIR = jsonObjectHijo.get("descripciones").getAsJsonArray().get(0).getAsJsonObject().get("d_asenta").toString().replace("\"", "") + ", " + jsonObjectHijo.get("calle").toString().replace("\"", "") + " " + jsonObjectHijo.get("numExt").toString().replace("\"", "") + "\n" + jsonObjectHijo.get("descripciones").getAsJsonArray().get(0).getAsJsonObject().get("D_mnpio").toString().replace("\"", "") + ", " + jsonObjectHijo.get("descripciones").getAsJsonArray().get(0).getAsJsonObject().get("d_estado").toString().replace("\"", "");
+                    }
+                    else if (jsonObjectHijo.get("mostrarMapa").toString().replace("\"", "").equals("apro")){
+                        LDIR = jsonObjectHijo.get("descripciones").getAsJsonArray().get(0).getAsJsonObject().get("d_asenta").toString().replace("\"", "") + "\n" + jsonObjectHijo.get("descripciones").getAsJsonArray().get(0).getAsJsonObject().get("D_mnpio").toString().replace("\"", "") + ", " + jsonObjectHijo.get("descripciones").getAsJsonArray().get(0).getAsJsonObject().get("d_estado").toString().replace("\"", "");
+                    }
+                    else {
+                        LDIR = jsonObjectHijo.get("descripciones").getAsJsonArray().get(0).getAsJsonObject().get("d_asenta").toString().replace("\"", "") + "\n" + jsonObjectHijo.get("descripciones").getAsJsonArray().get(0).getAsJsonObject().get("D_mnpio").toString().replace("\"", "") + ", " + jsonObjectHijo.get("descripciones").getAsJsonArray().get(0).getAsJsonObject().get("d_estado").toString().replace("\"", "");
+                    }
+
                     String Lon = jsonObjectHijo.get("longitud").toString().replace("\"", "");
                     Double LonD = Double.parseDouble(Lon);
                     if (jsonObjectHijo.get("mostrarMapa").toString().replace("\"", "").equals("exac")) {
@@ -154,16 +167,38 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
                         Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(LatD, LonD)).title(Titulo).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
                         arregloM.add(marker);
                     }
-                    datos.add(new Lista_entrada(LIDIMAGEN,LPRECIO,LDESC,LDIR));
+                    Lista_entrada lis = new Lista_entrada(LIDIMAGEN,LPRECIO,LDESC,LDIR);
+                    lis.JSON = jsonObjectHijo.toString();
+                    datos.add(lis);
                 }
-                ListView lista = (ListView) findViewById(R.id.mi_lista);
-                lista.setAdapter(new Lista_adaptador(buscandocasa.this, R.layout.casas, datos));
+                final ListView lista = (ListView) findViewById(R.id.mi_lista);
+                final Lista_adaptador adaptador = new Lista_adaptador(buscandocasa.this, R.layout.casas, datos);
+                lista.setAdapter(adaptador);
                 lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
-                        Globales.JsonCasa = "";
+                        Globales.JsonCasa = ((Lista_entrada) adaptador.getItem(posicion)).JSON;
                         Intent Cargando=new Intent(buscandocasa.this, seleccionadoboton.class);
                         startActivity(Cargando);
+                    }
+                });
+                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        String url = "http://159.65.231.12/api/inmuebleLatLon/" + marker.getPosition().latitude +"/" + marker.getPosition().longitude;
+                        Ion.with(getApplicationContext()).load(url).asString().setCallback(new FutureCallback<String>() {
+                            @Override
+                            public void onCompleted(Exception e, String result) {
+                                JsonParser parser = new JsonParser();
+                                JsonArray results = parser.parse(result).getAsJsonArray();
+                                JsonElement ElementHijo = results.get(0);
+                                JsonObject ObjectHijo = ElementHijo.getAsJsonObject();
+                                Globales.JsonCasa = ObjectHijo.toString();
+                                Intent Cargando=new Intent(buscandocasa.this, seleccionadoboton.class);
+                                startActivity(Cargando);
+                            }
+                        });
+                        return false;
                     }
                 });
             }
@@ -194,31 +229,35 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
 
-                if (Globales.ConectionIntent != null) {
-                    if (true) {
+                if (Globales.account != null) {
+                    if (Globales.googleSignInResult.isSuccess())
+                    {
+                        Auth.GoogleSignInApi.signOut(Globales.googleApiClient).setResultCallback(
+                                new ResultCallback<Status>() {
+                                    @Override
+                                    public void onResult(Status status) {
+                                        Toast.makeText(getApplicationContext(),"Te has desconectado con éxito",Toast.LENGTH_SHORT).show();
+                                        Globales.Seleccionada = null;
+                                        Globales.account = null;
+                                        Globales.ConectionIntent = null;
+                                        AsignarEvento();
+                                    }
+                                });
+                    }
+                    else {
                         Globales.Seleccionada = null;
-                        Globales.googleApiClient = null;
-                        Globales.gso = null;
                         Globales.account = null;
-                        Globales.ConectionIntent = null;
                         int SIGN_IN_CODE = 777;
                         Globales.ConectionIntent = Auth.GoogleSignInApi.getSignInIntent(Globales.googleApiClient);
                         startActivityForResult(Globales.ConectionIntent, SIGN_IN_CODE);
+                        AsignarEvento();
                     }
-                    else {
-                        Auth.GoogleSignInApi.signOut(Globales.googleApiClient);
-                        Globales.Seleccionada = null;
-                        Globales.googleApiClient = null;
-                        Globales.gso = null;
-                        Globales.account = null;
-                        Globales.ConectionIntent = null;
-                    }
-
                 }
                 else {
                     int SIGN_IN_CODE = 777;
                     Globales.ConectionIntent = Auth.GoogleSignInApi.getSignInIntent(Globales.googleApiClient);
                     startActivityForResult(Globales.ConectionIntent, SIGN_IN_CODE);
+                    AsignarEvento();
                 }
             }
         });
@@ -267,17 +306,6 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
                     .enableAutoManage(buscandocasa.this,buscandocasa.this)
                     .addApi(Auth.GOOGLE_SIGN_IN_API,Globales.gso)
                     .build();
-    }
-    private void handleSignInResult(GoogleSignInResult result) {
-        if (result.isSuccess()) {
-            Globales.account = result.getSignInAccount();
-            //falta poner imagen de logeado
-            Picasso.with(buscandocasa.this).load(R.drawable.usuario).into(fab);
-            //account.getId() PARA CONSEGUIR ID LOGEADO
-        }else{
-            Globales.account = null;
-            Picasso.with(buscandocasa.this).load(R.drawable.usuarionologeado).into(fab);
-        }
     }
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -348,10 +376,8 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onBackPressed() {
         Globales.Seleccionada = null;
-        Globales.googleApiClient = null;
         Globales.gso = null;
         Globales.account = null;
-        Globales.ConectionIntent = null;
         Intent Inicio=new Intent(buscandocasa.this, MainActivity.class);
         startActivity(Inicio);
         finish();
@@ -369,7 +395,10 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onStart() {
         super.onStart();
-        OptionalPendingResult<GoogleSignInResult>opr = Auth.GoogleSignInApi.silentSignIn(Globales.googleApiClient);
+        AsignarEvento();
+    }
+    void AsignarEvento(){
+        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(Globales.googleApiClient);
         if (opr.isDone()){
             GoogleSignInResult result=opr.get();
             handleSignInResult(result);
@@ -379,6 +408,41 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
                 public void onResult(@NonNull GoogleSignInResult googleSignInResult) {
                     handleSignInResult(googleSignInResult);
                 }
+            });
+        }
+    }
+    private void handleSignInResult(GoogleSignInResult result) {
+        Globales.googleSignInResult = result;
+        if (result.isSuccess()) {
+            Globales.account = result.getSignInAccount();
+            //falta poner imagen de logeado
+            Picasso.with(buscandocasa.this).load(R.drawable.usuario).into(fab);
+            Picasso.with(buscandocasa.this).load(R.drawable.usuario).into(new Target(){
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    fab.setBackground(new BitmapDrawable(buscandocasa.this.getResources(), bitmap));
+                }
+                @Override
+                public void onBitmapFailed(final Drawable errorDrawable) {
+                    Log.d("TAG", "FAILED");
+                }
+                @Override
+                public void onPrepareLoad(final Drawable placeHolderDrawable) { Log.d("TAG", "Prepare Load"); }
+            });
+            //account.getId() PARA CONSEGUIR ID LOGEADO
+        }else{
+            Picasso.with(buscandocasa.this).load(R.drawable.usuarionologeado).into(fab);
+            Picasso.with(buscandocasa.this).load(R.drawable.usuarionologeado).into(new Target(){
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    fab.setBackground(new BitmapDrawable(buscandocasa.this.getResources(), bitmap));
+                }
+                @Override
+                public void onBitmapFailed(final Drawable errorDrawable) {
+                    Log.d("TAG", "FAILED");
+                }
+                @Override
+                public void onPrepareLoad(final Drawable placeHolderDrawable) { Log.d("TAG", "Prepare Load"); }
             });
         }
     }
