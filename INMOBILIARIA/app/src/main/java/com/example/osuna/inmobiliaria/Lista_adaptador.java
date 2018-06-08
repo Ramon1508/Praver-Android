@@ -62,7 +62,7 @@ public class Lista_adaptador extends BaseAdapter {
      * @param entrada La entrada que será la asociada a la view. La entrada es del tipo del paquete/handler
      * @param view View particular que contendrá los datos del paquete/handler
      */
-    public void onEntrada (Object entrada, View view)
+    public void onEntrada (final Object entrada, View view)
     {
         TextView Precio = (TextView) view.findViewById(R.id.precioList);
         Precio.setText(((Lista_entrada) entrada).get_Precio());
@@ -73,8 +73,28 @@ public class Lista_adaptador extends BaseAdapter {
         TextView Direccion = (TextView) view.findViewById(R.id.direccionList);
         Direccion.setText(((Lista_entrada) entrada).get_Direccion());
 
-        ImageView imageview = (ImageView) view.findViewById(R.id.imageViewList);
-        Picasso.with(contexto).load(((Lista_entrada) entrada).get_idImagen()).into(imageview);
+        final ImageView imageview = (ImageView) view.findViewById(R.id.imageViewList);
+
+        Picasso.with(contexto).load(((Lista_entrada) entrada).get_idImagen()).into(new Target(){
+
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                imageview.setImageBitmap(Globales.resizeImage(bitmap, 250,250));
+            }
+
+            @Override
+            public void onBitmapFailed(final Drawable errorDrawable) {
+                Log.d("TAG", "FAILED");
+            }
+
+            @Override
+            public void onPrepareLoad(final Drawable placeHolderDrawable) {
+                Log.d("TAG", "Prepare Load");
+            }
+        });
+
+
+
         /*ImageView imgview = (ImageView) view.findViewById(R.id.imageView_imagen);
         Picasso.with(contexto).load(((Lista_entrada) entrada).get_idImagen()).fit().into(imgview);*/
 
