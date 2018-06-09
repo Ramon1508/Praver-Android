@@ -18,6 +18,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.util.ArrayList;
+
 public class seleccionadoboton extends AppCompatActivity {
 
     @Override
@@ -46,6 +48,7 @@ public class seleccionadoboton extends AppCompatActivity {
         ((TextView) findViewById(R.id.municipio)).setText(jsonObjectHijo.get("descripciones").getAsJsonArray().get(0).getAsJsonObject().get("D_mnpio").toString().replace("\"", ""));
         ((TextView) findViewById(R.id.colonia)).setText(jsonObjectHijo.get("descripciones").getAsJsonArray().get(0).getAsJsonObject().get("d_asenta").toString().replace("\"", ""));
         ((TextView) findViewById(R.id.detalleprop)).setText(jsonObjectHijo.get("descripcion").toString().replace("\"", ""));
+        ArrayList<String> linksImagenes = extraerimags(jsonObjectHijo);
                                         //A PARTIR DE AQUI NECESITA ESTAR LOGEADO PARA VER
         Boolean logeado = true;
         if (logeado) {
@@ -116,5 +119,13 @@ public class seleccionadoboton extends AppCompatActivity {
             ((TextView) findViewById(R.id.numext)).setVisibility(View.GONE);
             ((TextView) findViewById(R.id.codigopostal)).setVisibility(View.GONE);
         }
+    }
+    ArrayList<String> extraerimags(JsonObject object) {
+        ArrayList<String> result = new ArrayList<String>();
+        JsonArray resultados = object.get("imagenes").getAsJsonArray();
+        for (int i = 0; i < resultados.size(); i++) {
+            result.add("http://159.65.231.12/" + resultados.get(i).getAsJsonObject().get("imagen").toString().replace("\"", "").replace("./","/"));
+        }
+        return result;
     }
 }
