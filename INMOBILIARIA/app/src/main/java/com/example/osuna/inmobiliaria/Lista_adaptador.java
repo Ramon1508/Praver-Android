@@ -92,8 +92,12 @@ public class Lista_adaptador extends BaseAdapter {
                 Log.d("TAG", "Prepare Load");
             }
         });
+
+
+
         /*ImageView imgview = (ImageView) view.findViewById(R.id.imageView_imagen);
         Picasso.with(contexto).load(((Lista_entrada) entrada).get_idImagen()).fit().into(imgview);*/
+
     }
 }
 
