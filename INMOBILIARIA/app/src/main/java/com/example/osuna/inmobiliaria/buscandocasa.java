@@ -214,23 +214,16 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
         getLocationPermission();
         // Construct a FusedLocationProviderClient.
         TbH = (TabHost) findViewById(R.id.tabHost); //llamamos al Tabhost
-        TbH.setup();//lo activamos
+        TbH.setup();                                                         //lo activamos
         TabHost.TabSpec tab1 = TbH.newTabSpec("tab1");  //aspectos de cada Tab (pestaña)
         TabHost.TabSpec tab2 = TbH.newTabSpec("tab2");
-        tab1.setIndicator("",getResources().getDrawable(R.drawable.casaicono));//qué queremos que aparezca en las pestañas
+        tab1.setIndicator("INMUEBLES");    //qué queremos que aparezca en las pestañas
         tab1.setContent(R.id.ejemplo1); //definimos el id de cada Tab (pestaña)
-        tab2.setIndicator("",getResources().getDrawable(R.drawable.mapa));
+        tab2.setIndicator("MAPA");
         tab2.setContent(R.id.ejemplo2);
         TbH.addTab(tab1); //añadimos los tabs ya programados
         TbH.addTab(tab2);
         TbH.setCurrentTab(1);
-        //for(int i=0;i<TbH.getTabWidget().getChildCount();i++)
-        //{
-           // TbH.getTabWidget().getChildAt(i)
-             //       .setBackgroundColor(Color.parseColor("#ffffff"));
-
-        //}
-
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
