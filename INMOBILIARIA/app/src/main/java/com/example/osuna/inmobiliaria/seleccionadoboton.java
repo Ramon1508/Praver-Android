@@ -11,17 +11,27 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.squareup.picasso.Picasso;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 
 public class seleccionadoboton extends AppCompatActivity {
-
+    String[] sampleImages; //AQUI VAN LAS IMAGENES A MOSTRAR
+    int x=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +58,17 @@ public class seleccionadoboton extends AppCompatActivity {
         ((TextView) findViewById(R.id.municipio)).setText(jsonObjectHijo.get("descripciones").getAsJsonArray().get(0).getAsJsonObject().get("D_mnpio").toString().replace("\"", ""));
         ((TextView) findViewById(R.id.colonia)).setText(jsonObjectHijo.get("descripciones").getAsJsonArray().get(0).getAsJsonObject().get("d_asenta").toString().replace("\"", ""));
         ((TextView) findViewById(R.id.detalleprop)).setText(jsonObjectHijo.get("descripcion").toString().replace("\"", ""));
-        ArrayList<String> linksImagenes = extraerimags(jsonObjectHijo);
-                                        //A PARTIR DE AQUI NECESITA ESTAR LOGEADO PARA VER
+        //CARRUSEL LINEAS DE CODIGO
+        final CarouselView carouselView;
+        carouselView = (CarouselView) findViewById(R.id.carouselView);
+        String imagen=jsonObjectHijo.get("imagenes").getAsJsonArray().get(0).getAsJsonObject().get("imagen").toString();
+        imagen=imagen.substring(2,imagen.length()-1);
+        imagen="http://159.65.231.12"+imagen;
+        sampleImages= new String[]{imagen};
+        carouselView.setPageCount(sampleImages.length);
+        SampleCarouselViewActivity listen = new SampleCarouselViewActivity();
+        carouselView.setImageListener(listen.imageListener);
+        //A PARTIR DE AQUI NECESITA ESTAR LOGEADO PARA VER
         Boolean logeado = true;
         if (logeado) {
             final String telefono = jsonObjectHijo.get("datosVendedor").getAsJsonArray().get(0).getAsJsonObject().get("telefono").toString().replace("\"", "");
@@ -119,6 +138,20 @@ public class seleccionadoboton extends AppCompatActivity {
             ((TextView) findViewById(R.id.numext)).setVisibility(View.GONE);
             ((TextView) findViewById(R.id.codigopostal)).setVisibility(View.GONE);
         }
+
+    }
+    public class SampleCarouselViewActivity extends AppCompatActivity {
+
+
+        ImageListener imageListener = new ImageListener() {
+            @Override
+            public void setImageForPosition(int position, ImageView imageView) {
+                Picasso.with(imageView.getContext()).load(sampleImages[x]).fit().into(imageView);
+                x=x+1;
+
+            }
+        };
+
     }
     ArrayList<String> extraerimags(JsonObject object) {
         ArrayList<String> result = new ArrayList<String>();
