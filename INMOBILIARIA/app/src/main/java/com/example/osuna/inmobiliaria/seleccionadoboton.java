@@ -17,8 +17,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+<<<<<<< HEAD
 import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
+=======
+>>>>>>> parent of 1f29d08... Extracción de urls
 
 public class seleccionadoboton extends AppCompatActivity {
 
@@ -48,7 +51,11 @@ public class seleccionadoboton extends AppCompatActivity {
         ((TextView) findViewById(R.id.municipio)).setText(jsonObjectHijo.get("descripciones").getAsJsonArray().get(0).getAsJsonObject().get("D_mnpio").toString().replace("\"", ""));
         ((TextView) findViewById(R.id.colonia)).setText(jsonObjectHijo.get("descripciones").getAsJsonArray().get(0).getAsJsonObject().get("d_asenta").toString().replace("\"", ""));
         ((TextView) findViewById(R.id.detalleprop)).setText(jsonObjectHijo.get("descripcion").toString().replace("\"", ""));
+<<<<<<< HEAD
                                 //A PARTIR DE AQUI NECESITA ESTAR LOGEADO PARA VER
+=======
+                                        //A PARTIR DE AQUI NECESITA ESTAR LOGEADO PARA VER
+>>>>>>> parent of 1f29d08... Extracción de urls
         Boolean logeado = true;
         if (logeado) {
             final String telefono = jsonObjectHijo.get("datosVendedor").getAsJsonArray().get(0).getAsJsonObject().get("telefono").toString().replace("\"", "");
@@ -118,6 +125,9 @@ public class seleccionadoboton extends AppCompatActivity {
             ((TextView) findViewById(R.id.numext)).setVisibility(View.GONE);
             ((TextView) findViewById(R.id.codigopostal)).setVisibility(View.GONE);
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 1f29d08... Extracción de urls
     }
 }
