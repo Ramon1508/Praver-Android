@@ -272,7 +272,7 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
         filtros.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(buscandocasa.this, filtros.class);
+                Intent intent = new Intent(buscandocasa.this, Filtros.class);
                 startActivity(intent);
             }
         });

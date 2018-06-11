@@ -4,7 +4,7 @@
     <string name="title_activity_filtros">filtros</string>
     <string name="desc"></string>
     <string-array name="antiguedad">
-        <item></item>
+        
         <item>En construcción</item>
         <item>A estrenar</item>
         <item>Hasta 5 años</item>
@@ -14,7 +14,7 @@
         <item>Más de 50 años</item>
     </string-array>
     <string-array name="servicios">
-        <item></item>
+        
         <item>Gas</item>
         <item>Aire acondicionado</item>
         <item>Seguridad privada</item>
@@ -22,7 +22,7 @@
         <item>Amueblada</item>
     </string-array>
     <string-array name="tipoanunciante">
-        <item></item>
+        
         <item>Agente Independiente</item>
         <item>Inmobiliaria</item>
     </string-array>
@@ -30,14 +30,14 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_login">Sign in</string>
     <string-array name="tipooperacion">
-        <item></item>
+        
         <item>Comprar</item>
         <item>Rentar</item>
         <item>Alquiler Temporal</item>
         <item>Desarrollos</item>
     </string-array>
     <string-array name="tipopropiedad">
-        <item></item>
+        
         <item>Casa</item>
         <item>Departamento</item>
         <item>Terreno/Lote</item>
