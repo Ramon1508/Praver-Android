@@ -61,13 +61,11 @@ public class seleccionadoboton extends AppCompatActivity {
         //CARRUSEL LINEAS DE CODIGO
         final CarouselView carouselView;
         carouselView = (CarouselView) findViewById(R.id.carouselView);
-        String imagen=jsonObjectHijo.get("imagenes").getAsJsonArray().get(0).getAsJsonObject().get("imagen").toString();
-        imagen=imagen.substring(2,imagen.length()-1);
-        imagen="http://159.65.231.12"+imagen;
-        sampleImages= new String[]{imagen};
+        sampleImages= extraerimags(jsonObjectHijo).toArray(new String[0]);
         carouselView.setPageCount(sampleImages.length);
         SampleCarouselViewActivity listen = new SampleCarouselViewActivity();
         carouselView.setImageListener(listen.imageListener);
+
         //A PARTIR DE AQUI NECESITA ESTAR LOGEADO PARA VER
         Boolean logeado = true;
         if (logeado) {
@@ -141,17 +139,13 @@ public class seleccionadoboton extends AppCompatActivity {
 
     }
     public class SampleCarouselViewActivity extends AppCompatActivity {
-
-
         ImageListener imageListener = new ImageListener() {
             @Override
             public void setImageForPosition(int position, ImageView imageView) {
                 Picasso.with(imageView.getContext()).load(sampleImages[x]).fit().into(imageView);
                 x=x+1;
-
             }
         };
-
     }
     ArrayList<String> extraerimags(JsonObject object) {
         ArrayList<String> result = new ArrayList<String>();

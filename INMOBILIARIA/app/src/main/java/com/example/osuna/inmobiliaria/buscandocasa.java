@@ -268,12 +268,12 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         });
-        final ImageButton filtros = (ImageButton) findViewById(R.id.cmdfiltro);
+        ImageButton filtros = (ImageButton) findViewById(R.id.cmdfiltro);
         filtros.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(buscandocasa.this, filtros.class));
-
+                Intent intent = new Intent(buscandocasa.this, filtros.class);
+                startActivity(intent);
             }
         });
         autocompleteFragment = (PlaceAutocompleteFragment)
@@ -385,6 +385,7 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
         Globales.Seleccionada = null;
         Globales.gso = null;
         Globales.account = null;
+        Globales.JsonCasa = null;
         Intent Inicio=new Intent(buscandocasa.this, MainActivity.class);
         startActivity(Inicio);
         super.onBackPressed();
@@ -397,11 +398,6 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        AsignarEvento();
     }
     void AsignarEvento(){
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(Globales.googleApiClient);
