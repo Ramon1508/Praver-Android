@@ -69,35 +69,14 @@ public class Lista_adaptador extends BaseAdapter {
 
         TextView Descripcion = (TextView) view.findViewById(R.id.atributosList);
         Descripcion.setText(((Lista_entrada) entrada).get_Descripcion());
-
         TextView Direccion = (TextView) view.findViewById(R.id.direccionList);
         Direccion.setText(((Lista_entrada) entrada).get_Direccion());
-
         final ImageView imageview = (ImageView) view.findViewById(R.id.imageViewList);
-
-        Picasso.with(contexto).load(((Lista_entrada) entrada).get_idImagen()).into(new Target(){
-
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                imageview.setImageBitmap(Globales.resizeImage(bitmap, 250,250));
-            }
-
-            @Override
-            public void onBitmapFailed(final Drawable errorDrawable) {
-                Log.d("TAG", "FAILED");
-            }
-
-            @Override
-            public void onPrepareLoad(final Drawable placeHolderDrawable) {
-                Log.d("TAG", "Prepare Load");
-            }
-        });
-
-
-
+        Globales.CargarImagen(contexto, imageview, ((Lista_entrada) entrada).get_idImagen());
         /*ImageView imgview = (ImageView) view.findViewById(R.id.imageView_imagen);
         Picasso.with(contexto).load(((Lista_entrada) entrada).get_idImagen()).fit().into(imgview);*/
 
     }
+
 }
 

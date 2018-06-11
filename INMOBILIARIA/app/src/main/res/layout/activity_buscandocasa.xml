@@ -101,14 +101,15 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:focusableInTouchMode="false"
         app:backgroundTint="@android:color/holo_blue_dark"
-        app:srcCompat="@drawable/usuarionologeado"
-        tools:layout_editor_absoluteY="491dp" />
+        android:scaleType="fitXY"
+        android:src="@drawable/usuario"
+        app:fabSize="normal"/>
 
 </android.support.design.widget.CoordinatorLayout>

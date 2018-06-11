@@ -19,6 +19,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.koushikdutta.ion.Ion;
 import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
@@ -37,6 +38,8 @@ public class seleccionadoboton extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seleccionadoboton);
         JsonObject jsonObjectHijo = (new JsonParser()).parse(Globales.JsonCasa).getAsJsonObject();
+        String URL = "http://159.65.231.12/contadorVisitas/" + jsonObjectHijo.get("id").toString().replace("\"", "");
+        Ion.with(getApplicationContext()).load(URL).asString();
         final String titulo = jsonObjectHijo.get("titulo").toString().replace("\"", "");
         ((TextView) findViewById(R.id.tituloprop3)).setText(titulo);
         String precio;
@@ -68,7 +71,7 @@ public class seleccionadoboton extends AppCompatActivity {
 
         //A PARTIR DE AQUI NECESITA ESTAR LOGEADO PARA VER
         Boolean logeado = true;
-        if (logeado) {
+        if (Globales.account != null) {
             final String telefono = jsonObjectHijo.get("datosVendedor").getAsJsonArray().get(0).getAsJsonObject().get("telefono").toString().replace("\"", "");
             ((ImageButton) findViewById(R.id.llamar)).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -142,7 +145,7 @@ public class seleccionadoboton extends AppCompatActivity {
         ImageListener imageListener = new ImageListener() {
             @Override
             public void setImageForPosition(int position, ImageView imageView) {
-                Picasso.with(imageView.getContext()).load(sampleImages[x]).fit().into(imageView);
+                Globales.CargarImagen(imageView.getContext(), imageView, sampleImages[x]);
                 x=x+1;
             }
         };

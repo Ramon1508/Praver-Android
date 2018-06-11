@@ -70,9 +70,6 @@
         <activity
             android:name=".Cargando"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".inmuebledatos"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".seleccionadoboton" />
         <activity android:name=".Filtros"></activity>
     </application>

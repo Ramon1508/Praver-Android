@@ -40,11 +40,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
@@ -68,6 +71,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -85,6 +89,8 @@ import java.util.Arrays;
 
 public class buscandocasa extends FragmentActivity implements OnMapReadyCallback,GoogleApiClient.OnConnectionFailedListener {
     TabHost TbH;
+    private FirebaseAuth mAuth;
+    private int RC_SIGN_IN = 777;
     private GoogleMap mMap;
     PlaceAutocompleteFragment autocompleteFragment;
     protected float ZoomBusqueda = (float) 10.8;
@@ -204,6 +210,7 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
             }
         });
     }
+    GoogleSignInClient mGoogleSignInClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -230,44 +237,7 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
              //       .setBackgroundColor(Color.parseColor("#ffffff"));
 
         //}
-
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (Globales.account != null) {
-                    if (Globales.googleSignInResult.isSuccess())
-                    {
-                        Auth.GoogleSignInApi.signOut(Globales.googleApiClient).setResultCallback(
-                                new ResultCallback<Status>() {
-                                    @Override
-                                    public void onResult(Status status) {
-                                        Toast.makeText(getApplicationContext(),"Te has desconectado con éxito",Toast.LENGTH_SHORT).show();
-                                        Globales.Seleccionada = null;
-                                        Globales.account = null;
-                                        Globales.ConectionIntent = null;
-                                        AsignarEvento();
-                                    }
-                                });
-                    }
-                    else {
-                        Globales.Seleccionada = null;
-                        Globales.account = null;
-                        int SIGN_IN_CODE = 777;
-                        Globales.ConectionIntent = Auth.GoogleSignInApi.getSignInIntent(Globales.googleApiClient);
-                        startActivityForResult(Globales.ConectionIntent, SIGN_IN_CODE);
-                        AsignarEvento();
-                    }
-                }
-                else {
-                    int SIGN_IN_CODE = 777;
-                    Globales.ConectionIntent = Auth.GoogleSignInApi.getSignInIntent(Globales.googleApiClient);
-                    startActivityForResult(Globales.ConectionIntent, SIGN_IN_CODE);
-                    AsignarEvento();
-                }
-            }
-        });
         ImageButton filtros = (ImageButton) findViewById(R.id.cmdfiltro);
         filtros.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -304,15 +274,10 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
                 Toast.makeText(buscandocasa.this, ""+status.toString(), Toast.LENGTH_SHORT).show();
             }
         });
-        if (Globales.gso == null)
-            Globales.gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestEmail()
-                    .build();
-        if (Globales.googleApiClient == null)
-            Globales.googleApiClient=new GoogleApiClient.Builder(buscandocasa.this)
-                    .enableAutoManage(buscandocasa.this,buscandocasa.this)
-                    .addApi(Auth.GOOGLE_SIGN_IN_API,Globales.gso)
-                    .build();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        Globales.account = GoogleSignIn.getLastSignedInAccount(this);
+        updateUI(Globales.account);
     }
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -383,69 +348,66 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onBackPressed() {
         Globales.Seleccionada = null;
-        Globales.gso = null;
-        Globales.account = null;
         Globales.JsonCasa = null;
         Intent Inicio=new Intent(buscandocasa.this, MainActivity.class);
         startActivity(Inicio);
         super.onBackPressed();
     }
-    public static String[] añadirValorArray(String[] a, String e) {
-        a  = Arrays.copyOf(a, a.length + 1);
-        a[a.length - 1] = e;
-        return a;
-    }
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-    void AsignarEvento(){
-        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(Globales.googleApiClient);
-        if (opr.isDone()){
-            GoogleSignInResult result=opr.get();
-            handleSignInResult(result);
-        }else{
-            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+    public void updateUI(GoogleSignInAccount user) {
+        Globales.account = user;
+        if (user == null) {
+            Picasso.with(buscandocasa.this).load(R.drawable.usuarionologeado).into(fab);
+            fab.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onResult(@NonNull GoogleSignInResult googleSignInResult) {
-                    handleSignInResult(googleSignInResult);
+                public void onClick(View view) {
+                    signIn();
+                }
+            });
+        }
+        else {
+            Picasso.with(buscandocasa.this).load(R.drawable.usuario).into(fab);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    logOut();
                 }
             });
         }
     }
-    private void handleSignInResult(GoogleSignInResult result) {
-        Globales.googleSignInResult = result;
-        if (result.isSuccess()) {
-            Globales.account = result.getSignInAccount();
-            //falta poner imagen de logeado
-            Picasso.with(buscandocasa.this).load(R.drawable.usuario).into(fab);
-            Picasso.with(buscandocasa.this).load(R.drawable.usuario).into(new Target(){
-                @Override
-                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                    fab.setBackground(new BitmapDrawable(buscandocasa.this.getResources(), bitmap));
-                }
-                @Override
-                public void onBitmapFailed(final Drawable errorDrawable) {
-                    Log.d("TAG", "FAILED");
-                }
-                @Override
-                public void onPrepareLoad(final Drawable placeHolderDrawable) { Log.d("TAG", "Prepare Load"); }
-            });
-            //account.getId() PARA CONSEGUIR ID LOGEADO
-        }else{
-            Picasso.with(buscandocasa.this).load(R.drawable.usuarionologeado).into(fab);
-            Picasso.with(buscandocasa.this).load(R.drawable.usuarionologeado).into(new Target(){
-                @Override
-                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                    fab.setBackground(new BitmapDrawable(buscandocasa.this.getResources(), bitmap));
-                }
-                @Override
-                public void onBitmapFailed(final Drawable errorDrawable) {
-                    Log.d("TAG", "FAILED");
-                }
-                @Override
-                public void onPrepareLoad(final Drawable placeHolderDrawable) { Log.d("TAG", "Prepare Load"); }
-            });
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+    private void logOut() {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Globales.account = null;
+                        updateUI(Globales.account);
+                        Toast.makeText(buscandocasa.this,"Te has desconectado con éxito.",Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) { }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            updateUI(account);
+            Toast.makeText(buscandocasa.this,"Te has conectado con éxito.", Toast.LENGTH_SHORT).show();
+        } catch (ApiException e) {
+            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+            updateUI(null);
         }
     }
 }
