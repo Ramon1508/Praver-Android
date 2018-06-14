@@ -19,6 +19,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
@@ -39,13 +40,15 @@ public class seleccionadoboton extends AppCompatActivity {
         setContentView(R.layout.activity_seleccionadoboton);
         JsonObject jsonObjectHijo = (new JsonParser()).parse(Globales.JsonCasa).getAsJsonObject();
         String URL = "http://159.65.231.12/contadorVisitas/" + jsonObjectHijo.get("id").toString().replace("\"", "");
-        Ion.with(getApplicationContext()).load(URL).asString();
+        Ion.with(getApplicationContext()).load(URL).asString().setCallback(new FutureCallback<String>() {
+            @Override
+            public void onCompleted(Exception e, String result) {}});
         final String titulo = jsonObjectHijo.get("titulo").toString().replace("\"", "");
         ((TextView) findViewById(R.id.tituloprop3)).setText(titulo);
         String precio;
-        if (!jsonObjectHijo.get("precioVenta").toString().replace("\"", "").equals(""))
+        if (!jsonObjectHijo.get("precioVenta").toString().replace("\"", "").equals("null"))
             precio = "Precio de venta: $" + jsonObjectHijo.get("precioVenta").toString().replace("\"", "");
-        else if (!jsonObjectHijo.get("precioRenta").toString().replace("\"", "").equals(""))
+        else if (!jsonObjectHijo.get("precioRenta").toString().replace("\"", "").equals("null"))
             precio = "Precio de renta: $" + jsonObjectHijo.get("precioRenta").toString().replace("\"", "");
         else
             precio = "Precio de traspaso: $" + jsonObjectHijo.get("precioTraspaso").toString().replace("\"", "");

@@ -136,7 +136,13 @@ public class buscandocasa extends FragmentActivity implements OnMapReadyCallback
                 {
                     JsonElement jsonElementHijo = resultados.get(i);
                     JsonObject jsonObjectHijo = jsonElementHijo.getAsJsonObject();
-                    String LPRECIO="$" + jsonObjectHijo.get("precioVenta").toString().replace("\"", "") + " ";
+                    String LPRECIO;
+                    if (!jsonObjectHijo.get("precioVenta").toString().replace("\"", "").equals("null"))
+                        LPRECIO = "Precio de venta: $" + jsonObjectHijo.get("precioVenta").toString().replace("\"", "");
+                    else if (!jsonObjectHijo.get("precioRenta").toString().replace("\"", "").equals("null"))
+                        LPRECIO = "Precio de renta: $" + jsonObjectHijo.get("precioRenta").toString().replace("\"", "");
+                    else
+                        LPRECIO = "Precio de traspaso: $" + jsonObjectHijo.get("precioTraspaso").toString().replace("\"", "");
                     String LIDIMAGEN="http://159.65.231.12/" + jsonObjectHijo.get("imagenes").getAsJsonArray().get(0).getAsJsonObject().get("imagen").toString().replace("\"", "").replace("./","/");
                     String LDESC = "";
                     String LDIR="";
