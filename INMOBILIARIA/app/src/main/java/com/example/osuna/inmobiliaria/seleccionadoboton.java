@@ -39,8 +39,8 @@ public class seleccionadoboton extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seleccionadoboton);
         JsonObject jsonObjectHijo = (new JsonParser()).parse(Globales.JsonCasa).getAsJsonObject();
-        String URL = "http://159.65.231.12/contadorVisitas/" + jsonObjectHijo.get("id").toString().replace("\"", "");
-        Ion.with(getApplicationContext()).load(URL).asString().setCallback(new FutureCallback<String>() {
+        String url = "http://159.65.231.12/api/contadorVisitas/" + jsonObjectHijo.get("id").toString().replace("\"", "");
+        Ion.with(getApplicationContext()).load(url).asString().setCallback(new FutureCallback<String>() {
             @Override
             public void onCompleted(Exception e, String result) {}});
         final String titulo = jsonObjectHijo.get("titulo").toString().replace("\"", "");
